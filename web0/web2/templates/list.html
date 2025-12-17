@@ -1,0 +1,43 @@
+    {% load static %}
+<form action="{% url 'checkout' %}" method="get">
+    <button type="button" onclick="toggleBox()">chicken</button>
+    <div id="box" style="display:none;">
+        <img src="{% static 'chicken.jpg' %}" width="200">
+        <h3>Fried chicken</h3>
+        <p>Giá: 50.000đ</p>
+        <input type="hidden" name="food" value="Fried chicken">
+        <input type="hidden" name="price" value="50000">
+        <label>Số lượng:</label>
+        <input type="number" name="quantity" id="quantity" value="0" min="0"> miếng
+    </div>
+
+    <script>
+        function toggleBox() {
+        let box = document.getElementById("box");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+        }
+    </script>
+        <br><br>
+    <button type="button" onclick="toggleBox1()">Cocacola</button>
+
+    <div id="box1" style="display:none;">
+        <img src="{% static 'cocacola.jpg' %}" width="200">
+        <h3>Cocacola</h3>
+        <p>Giá: 10.000đ</p>
+        <input type="hidden" name="food1" value="Cocacola">
+        <input type="hidden" name="price1" value="10000">
+        <label>Số lượng:</label>
+        <input type="number" name="quantity1" id="quantity" value="0" min="0"> chai
+    </div>
+
+    <script>
+        function toggleBox1() {
+            let box = document.getElementById("box1");
+            box.style.display = box.style.display === "none" ? "block" : "none";
+            }
+    </script>
+
+    <br><br>
+        
+    <button type="submit">Pay bill</button>
+</form>

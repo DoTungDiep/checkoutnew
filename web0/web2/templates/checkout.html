@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Checkout</title>
+</head>
+<body>
+<h1>Checkout</h1>
+<h3>Your Cart</h3>
+<hr>
+<form method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<form action="{% url 'confirm' %}" method="get">
+    <input type="hidden" name="food" value="Fried chicken">
+    <input type="hidden" name="price" value="50000">
+    <input type="hidden" name="quantity" id="quantity" value="{{quantity}}">
+    <input type="hidden" name="food1" value="Cocacola">
+    <input type="hidden" name="price1" value="10000">
+    <input type="hidden" name="quantity1" id="quantity" value="{{quantity1}}">
+    <button type="submit">submit</button>
+</form>
+</body>
+</html>
