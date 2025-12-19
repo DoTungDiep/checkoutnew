@@ -1,4 +1,6 @@
-
+<style>table, th, td {
+    border: 1px solid black
+}</style>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +9,36 @@
 <body>
 <h1>Checkout</h1>
 <h3>Your Cart</h3>
+<ul>
+<h2>Hóa đơn</h2>
+<table style='width:100%'>
+    <tr>
+        <td>Món</td>
+        <td>Giá</td>
+        <td>Số lượng</td>
+    </tr>
+    <tr>
+        <td>{{food}}</td>
+        <td>{{price}}</td>
+        <td>{{quantity}}</td>
+    </tr>
+    <tr>
+        <td>{{food1}}</td>
+        <td>{{price1}}</td>
+        <td>{{quantity1}}</td>
+    </tr>
+</table>
 <hr>
 <form method="POST">
 {% csrf_token %}
 {{ form.as_p }}
-<form action="{% url 'confirm' %}" method="get">
-    <input type="hidden" name="food" value="Fried chicken">
-    <input type="hidden" name="price" value="50000">
-    <input type="hidden" name="quantity" id="quantity" value="{{quantity}}">
-    <input type="hidden" name="food1" value="Cocacola">
-    <input type="hidden" name="price1" value="10000">
-    <input type="hidden" name="quantity1" id="quantity" value="{{quantity1}}">
-    <button type="submit">submit</button>
+<button type="submit">
+    submit
+    </button>
 </form>
+<p>
+    <b>Tổng tiền: {{ total }} đ</b>
+</p>
+
 </body>
 </html>

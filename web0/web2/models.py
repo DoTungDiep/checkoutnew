@@ -1,5 +1,5 @@
 from django.db import models
-
+from django import forms
 class Order(models.Model):
     full_name = models.CharField(max_length=100,)
     email = models.EmailField()
@@ -23,3 +23,6 @@ class OrderItem(models.Model):
 def __str__(self):
     return f"{self.product_name} x {self.quantity}"
 # Create your models here.
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=63)
+    password = forms.CharField(max_length=63, widget=forms.PasswordInput)

@@ -20,9 +20,11 @@ from web2 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", views.ho),
+    path("", views.home, name="home"),
     path("checkout.html", views.checkout, name="checkout"),
-    path("success.html", views.success, name="checkout_success"),
+    path("success.html/", views.success, name="checkout_success"),
     path("cf.html", views.confirm, name="confirm" ),
-    path("list.html", views.list, name ="list")
+    path("list.html", views.list, name ="list"),
+    path("signup.html", views.signup, name="sigup"),
+    path("login.html",views.login,name="login")
 ]

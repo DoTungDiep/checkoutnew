@@ -1,15 +1,40 @@
 from django.shortcuts import render
-
-def ho(request):
-    return render(request, "ho.html")
-
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from .forms import CheckoutForm
 from .models import Order, OrderItem
+from django.http import HttpResponse
+def signup(request):
+    if request.method == 'POST':
+        u_name_signup= request.POST.get('user_namesu')
+        pw_signup= request.POST.get('passwordsu')
+        #store users
+        users = request.session.get('users', {})
+        users[u_name_signup] = pw_signup
+        request.session['users'] = users
+        return redirect("login")
+    return render(request, "signup.html")
+
+def login(request):
+    if request.method == 'POST':
+        u_name = request.POST.get('user_name')
+        pw = request.POST.get('password')
+        users = request.session.get('users', {})
+        if u_name in users and users[u_name] == pw:
+            redirect('list')
+    return render(request, "login.html")
+    
 
 
 # Dummy cart items for demo (replace with your cart system)
-def checkout(request): 
+def checkout(request):
+    food = request.GET.get('food',)
+    price = int(request.GET.get('price',))
+    quantity = int(request.GET.get('quantity',))
+    food1 = request.GET.get('food1')
+    price1 = int(request.GET.get('price1',))
+    quantity1 = int(request.GET.get('quantity1',))
+    total = (price * quantity)+(price1 * quantity1) 
     if request.method == "POST":
         form = CheckoutForm(request.POST)
         if form.is_valid():
@@ -19,35 +44,23 @@ def checkout(request):
             print(form.errors)
     else:
         form = CheckoutForm()
-        return render(request,'checkout.html',{
-            'form':form,
-        })
-def success(request):
-    return render(request, "success.html")
-
-def confirm(request):
-    quantity = int(request.session.get('quantity',0))
-    food1 = request.session.get('food1')
-    price1 = int(request.session.get('price1'))
-    quantity1 = int(request.session.get('quantity1',0))
-    food = request.session.get('food')
-    price = request.session.get('price')
-    total = (price * quantity)+(price1 * quantity1)
-    return render(request,"cf.html",{
+    return render(request, 'checkout.html', {
         'food': food,
         'price': price,
         'quantity': quantity,
         'total': total,
+        'form': form,
         'food1':food1,
         'price1': price1,
         'quantity1':quantity1
     })
+def success(request):
+    return render(request, "success.html")
+
+def confirm(request):
+    return render(request,"cf.html")
 
 def list(request):
-    request.session['food'] = request.GET.get('food')
-    request.session['price'] = request.GET.get('price')
-    request.session['quantity1'] = request.GET.get('quantity1')
-    request.session['quantity'] = request.GET.get('quantity')
-    request.session['price1'] = request.GET.get('price1')
-    request.session['food1'] = request.GET.get('food1')
     return render(request, "list.html")
+def home(request):
+    return render(request, 'home.html')

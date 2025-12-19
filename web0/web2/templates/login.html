@@ -1,0 +1,17 @@
+<style>table, th, td {
+    border: 1px solid black
+}
+
+</style>
+<h1>Login in to my web</h1>
+<form method="post">
+{% csrf_token %}
+<br>
+User Name: <input type="text" name="user_name" placeholder="Username"></input>
+<br>
+Password: <input type="password" name="password" placeholder="Password"></input>
+
+<br>
+<button type="submit">Login</button>
+</form>
+if you don't have acc, so <a href="signup.html">sign up</a>
